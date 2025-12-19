@@ -1,0 +1,42 @@
+<p-toast></p-toast>
+
+<div class="card contact-card">
+  <h2>Contact</h2>
+
+  <div class="field">
+    <label for="email">Email *</label>
+    <input
+      id="email"
+      type="email"
+      pInputText
+      [(ngModel)]="email"
+      placeholder="ex: user@email.com"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label for="message">Message *</label>
+    <textarea
+      id="message"
+      pInputTextarea
+      rows="5"
+      [(ngModel)]="message"
+      maxlength="300"
+      placeholder="Votre message (300 caractères max)"
+      required>
+    </textarea>
+
+    <small>{{ message.length }}/300</small>
+  </div>
+
+  <button
+    pButton
+    label="Envoyer"
+    icon="pi pi-send"
+    class="mt-3"
+    [loading]="sending"
+    [disabled]="!email || !message || message.length > 300"
+    (click)="send()">
+  </button>
+</div>

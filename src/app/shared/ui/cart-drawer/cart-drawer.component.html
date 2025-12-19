@@ -1,0 +1,15 @@
+<p-sidebar 
+    [visible]="visible()" 
+    [position]="'right'" 
+    [baseZIndex]="10000"
+    (onHide)="visible.set(false)">
+  <h2>Panier</h2>
+
+  <div *ngFor="let item of items()">
+    <p>{{ item.product.name }} - Quantité: {{ item.quantity }}</p>
+    <button pButton type="button" label="Supprimer" (click)="remove(item.product.id)"></button>
+  </div>
+
+  <p>Total: {{ totalQuantity() }}</p>
+  <button pButton type="button" label="Vider le panier" (click)="clear()"></button>
+</p-sidebar>
