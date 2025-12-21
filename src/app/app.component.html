@@ -10,13 +10,18 @@
   </div>
 </p-toolbar>
 
-<p-splitter [panelSizes]="[20,80]" [style]="{ height: 'calc(100vh - 100px)' }">
-  <ng-template pTemplate>
-    <app-panel-menu></app-panel-menu>
-  </ng-template>
-  <ng-template pTemplate>
-    <router-outlet></router-outlet>
-  </ng-template>
+
+<p-splitter  [panelSizes]="[20, 80]" [style]="{ height: 'calc(100vh - 100px)' }">
+    <ng-template pTemplate>
+        <div class="w-full">
+            <app-panel-menu />
+        </div>
+    </ng-template>
+    <ng-template pTemplate>  <div class="w-full app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
 </p-splitter>
+
 
 <app-cart-drawer #cartDrawer></app-cart-drawer>

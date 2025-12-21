@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToastModule } from 'primeng/toast';
+import { CardModule } from "primeng/card";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
@@ -14,12 +14,11 @@ import { ContactService } from '../../data-access/contact.service';
   styleUrls: ['./contact.component.scss'],
   imports: [
     FormsModule,
-    ToastModule,
-    InputTextModule,
-    InputTextareaModule,
-    ButtonModule
-  ],
-  providers: [MessageService]
+  InputTextModule,
+  InputTextareaModule,
+  ButtonModule,
+  CardModule
+  ]
 })
 export class ContactComponent {
 
@@ -46,7 +45,6 @@ export class ContactComponent {
           summary: 'Succès',
           detail: 'Demande de contact envoyée avec succès'
         });
-
         this.email = '';
         this.message = '';
         this.sending = false;
