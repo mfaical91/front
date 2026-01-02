@@ -1,46 +1,52 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
-import { CartService, CartItem } from '../../data-access/cart.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
+import { CardModule } from 'primeng/card';
+import { CartService, CartItem } from '../../../shared/data-access/cart.service';
 
 @Component({
   selector: 'app-cart-drawer',
   standalone: true,
-  imports: [CommonModule, SidebarModule, ButtonModule],
+  imports: [
+    CommonModule,
+    SidebarModule,
+    ButtonModule,
+    InputNumberModule,
+    FormsModule,
+    CardModule
+  ],
   templateUrl: './cart-drawer.component.html',
 })
 export class CartDrawerComponent {
-  // Signal pour contrôler la visibilité du drawer
+
   visible = signal(false);
 
-  // Computed pour suivre les items du panier
-  items = computed(() => this.cart.items());
+  private cart = inject(CartService);
 
-  // Quantité totale des produits
+  // items du panier (signal)
+  items = this.cart.items;
+
+  // Quantité totale
   totalQuantity = computed(() =>
     this.items().reduce((sum, i) => sum + i.quantity, 0)
   );
 
-  constructor(private cart: CartService) {}
-
-  // Supprimer un produit du panier
-  remove(productId: number) {
-    this.cart.remove(productId);
-  }
-
-  // Vider le panier
-  clear() {
-    this.cart.clear();
-  }
-
-  // Ouvrir le drawer
   open() {
     this.visible.set(true);
   }
 
-  // Fermer le drawer
   close() {
     this.visible.set(false);
+  }
+
+  updateQuantity(item: CartItem) {
+    this.cart.updateQuantity(item.product, item.quantity);
+  }
+
+  remove(item: CartItem) {
+    this.cart.remove(item.product);
   }
 }

@@ -3,7 +3,21 @@
     <div>
       <h4>{{ item.product.name }}</h4>
       <p>Prix : {{ item.product.price | currency:'EUR' }}</p>
-      <p>Quantité : {{ item.quantity }}</p>
+
+      <p>
+        <strong>Quantité :</strong>
+      </p>
+
+      <p-inputNumber
+        [(ngModel)]="item.quantity"
+        [min]="1"
+        [max]="item.product.quantity"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        (onInput)="updateQuantity(item)">
+      </p-inputNumber>
     </div>
 
     <button

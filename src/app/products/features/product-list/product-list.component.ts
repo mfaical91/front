@@ -7,6 +7,8 @@ import { ButtonModule } from "primeng/button";
 import { CardModule } from "primeng/card";
 import { DataViewModule } from 'primeng/dataview';
 import { DialogModule } from 'primeng/dialog';
+import { ProductWithUI } from "app/products/data-access/product.model";
+
 
 const emptyProduct: Product = {
   id: 0,
@@ -37,15 +39,27 @@ export class ProductListComponent implements OnInit {
   private cart: CartService = inject(CartService);
   private readonly productsService = inject(ProductsService);
 
-  public readonly products = this.productsService.products;
+  public readonly products = signal<ProductWithUI[]>([]);
+
 
   public isDialogVisible = false;
   public isCreation = false;
   public readonly editedProduct = signal<Product>(emptyProduct);
 
+  
   ngOnInit() {
-    this.productsService.get().subscribe();
+    this.productsService.get().subscribe({
+      next: (data) => {
+        this.products.set(
+          data.map(p => ({
+            ...p,
+            selectedQty: 1
+          }))
+        );
+      }
+    });
   }
+
 
   public onCreate() {
     this.isCreation = true;
@@ -80,7 +94,8 @@ export class ProductListComponent implements OnInit {
     this.isDialogVisible = false;
   }
 
-  addToCart(product: Product) {
-    this.cart.add(product);
-  }
+ addToCart(product: ProductWithUI) {
+  this.cart.add(product, product.selectedQty ?? 1);
+}
+
 }

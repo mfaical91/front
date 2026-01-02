@@ -14,3 +14,7 @@ export interface Product {
     createdAt: number;
     updatedAt: number;
 }
+
+export type ProductWithUI = Product & {
+  selectedQty?: number;
+};
