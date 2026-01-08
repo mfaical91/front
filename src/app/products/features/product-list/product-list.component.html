@@ -5,9 +5,9 @@
 <p-dataView
     #dv
     [value]="products()"
-    [paginator]="true"
+    [paginator]="(products()?.length ?? 0) > 0"
     [rows]="5"
-    [rowsPerPageOptions]="[5,10,20]"
+    [rowsPerPageOptions]="[5,10,20]" 
 >
     <ng-template pTemplate="list" let-products>
         @for (product of products; track product) {
