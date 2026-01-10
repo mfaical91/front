@@ -39,7 +39,15 @@
     "@angular/language-service": "18.0.2",
     "@biomejs/biome": "1.7.2",
     "@types/chart.js": "2.9.30",
+    "@types/jasmine": "^5.1.14",
     "@types/node": "20.12.12",
+    "jasmine-core": "^5.13.0",
+    "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-coverage": "^2.2.1",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.1.0",
     "ts-node": "7.0.0"
   }
 }
